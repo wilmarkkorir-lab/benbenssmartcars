@@ -135,16 +135,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# CORS Configuration - Allow frontend connections
+CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins during development
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'http://localhost:3001',
+    'http://localhost:3001', 
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001',
     'http://192.168.56.1:3000',
-    'http://192.168.56.1:3001', 
+    'http://192.168.56.1:3001',
     'https://benbenssmartcars.alwaysdata.net',
 ]
 
-# Allow all origins during development
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
