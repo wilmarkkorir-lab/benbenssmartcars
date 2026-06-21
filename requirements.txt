@@ -1,0 +1,5 @@
+django==4.2.30
+djangorestframework
+django-cors-headers
+mysqlclient
+Pillow
