@@ -138,8 +138,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:3001',
+    'http://192.168.56.1:3000',
+    'http://192.168.56.1:3001', 
     'https://benbenssmartcars.alwaysdata.net',
 ]
+
+# Allow all origins during development
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

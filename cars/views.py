@@ -9,6 +9,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class CarViewSet(viewsets.ModelViewSet):
+    queryset = Car.objects.all()
     serializer_class = CarSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['brand', 'model', 'year', 'condition', 'category__name']
