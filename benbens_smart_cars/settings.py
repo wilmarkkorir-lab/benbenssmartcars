@@ -3,15 +3,9 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv(BASE_DIR / '.env')
-except Exception:
-    pass
+SECRET_KEY = '#rm5e&1x27xnsr^8m&fmo12fw9@o!+@v194___vy0(*xq6gg^&'
 
-SECRET_KEY = os.environ.get('SECRET_KEY') or '#rm5e&1x27xnsr^8m&fmo12fw9@o!+@v194___vy0(*xq6gg^&'
-
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'benbenssmartcars.alwaysdata.net',
