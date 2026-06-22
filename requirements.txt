@@ -3,4 +3,5 @@ djangorestframework
 django-cors-headers
 mysqlclient
 Pillow
+requests
 python-dotenv
