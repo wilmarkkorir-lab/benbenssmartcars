@@ -66,6 +66,9 @@ DATABASES = {
         'USER': os.environ.get('DB_USER', 'benbenssmartcars'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'modcom2026'),
         'HOST': os.environ.get('DB_HOST', 'mysql-benbenssmartcars.alwaysdata.net'),
+        'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES',
+        },
     }
 }
 
