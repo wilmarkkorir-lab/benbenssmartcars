@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from django.conf.urls.static import static
+from django.views.static import serve
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -31,4 +31,5 @@ urlpatterns = [
     path('api/', include('cars.urls')),
     path('api/', include('customers.urls')),
     path('api/', include('sales.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
+]
