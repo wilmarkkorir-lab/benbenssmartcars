@@ -15,13 +15,14 @@ class CustomerSerializer(serializers.ModelSerializer):
     def validate_phone(self, value):
         if not value or not value.strip():
             raise serializers.ValidationError("Phone is required")
-        digits = value.strip().replace('+', '').replace('-', '').replace(' ', '')
-        if not digits.isdigit() or not (7 <= len(digits) <= 15):
-            raise serializers.ValidationError("Enter a valid phone number")
         return value.strip()
 
 
 class InquirySerializer(serializers.ModelSerializer):
+    customer_name = serializers.CharField(source='customer.name', read_only=True)
+    customer_email = serializers.CharField(source='customer.email', read_only=True)
+    customer_phone = serializers.CharField(source='customer.phone', read_only=True)
+
     class Meta:
         model = Inquiry
         fields = '__all__'

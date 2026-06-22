@@ -13,11 +13,11 @@ class Customer(models.Model):
 
 
 class Inquiry(models.Model):
-    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='inquiries')
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='inquiries', null=True, blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='inquiries')
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_resolved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Inquiry by {self.customer} on {self.car}"
+        return f"Inquiry by {self.customer}"
