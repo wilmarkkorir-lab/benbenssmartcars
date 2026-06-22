@@ -1,29 +1,26 @@
-# Environment variables
-.env
-
 # Python
+*.pyc
+*.pyo
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.egg-info/
-dist/
-build/
-*.egg
 
 # Django
 *.log
 local_settings.py
 db.sqlite3
 media/
-static/
+
+# Environment variables - NEVER commit these
+.env
+.env.local
+.env.production
 
 # Virtual environment
 venv/
 env/
-.venv/
+ENV/
 
 # IDE
 .vscode/
 .idea/
-*.iml
+*.swp

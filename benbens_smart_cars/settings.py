@@ -3,9 +3,9 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-f68zo%s+3^p4*$v5t1o)7#3rtl(u#8$&6d!8bwbv)-&1t53r6g'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-f68zo%s+3^p4*$v5t1o)7#3rtl(u#8$&6d!8bwbv)-&1t53r6g')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'benbenssmartcars.alwaysdata.net',
@@ -62,10 +62,10 @@ WSGI_APPLICATION = 'benbens_smart_cars.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'benbenssmartcars_cars',
-        'USER': 'benbenssmartcars',
-        'PASSWORD': 'modcom2026',
-        'HOST': 'mysql-benbenssmartcars.alwaysdata.net',
+        'NAME': os.environ.get('DB_NAME', 'benbenssmartcars_cars'),
+        'USER': os.environ.get('DB_USER', 'benbenssmartcars'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'modcom2026'),
+        'HOST': os.environ.get('DB_HOST', 'mysql-benbenssmartcars.alwaysdata.net'),
     }
 }
 
@@ -88,29 +88,44 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email configuration - Gmail SMTP
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'wilmarkkorir@gmail.com'
-EMAIL_HOST_PASSWORD = 'your_gmail_app_password'
-DEFAULT_FROM_EMAIL = 'BenBens Smart Cars <wilmarkkorir@gmail.com>'
-NOTIFY_EMAIL = 'wilmarkkorir@gmail.com'
-
-# WhatsApp notification via CallMeBot
-WHATSAPP_PHONE = '254705387545'  # Your number without +
-WHATSAPP_API_KEY = 'your_callmebot_api_key'  # Replace after setup
-
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS - Only allow your frontend domains
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'https://benbenssmartcars.alwaysdata.net',
+    'https://benbenssmart-cars.vercel.app',
+    'https://benbenssmart-cars-git-main.vercel.app',
+]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     'accept', 'accept-encoding', 'authorization', 'content-type',
     'dnt', 'origin', 'user-agent', 'x-csrftoken', 'x-requested-with',
 ]
 
+# Rate limiting to prevent abuse
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '200/day',
+    }
 }
+
+# Email configuration - Gmail SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'wilmarkkorir@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'your_gmail_app_password')
+DEFAULT_FROM_EMAIL = 'BenBens Smart Cars <wilmarkkorir@gmail.com>'
+NOTIFY_EMAIL = 'wilmarkkorir@gmail.com'
+
+# WhatsApp notification via CallMeBot
+WHATSAPP_PHONE = '254705387545'
+WHATSAPP_API_KEY = os.environ.get('WHATSAPP_API_KEY', 'your_callmebot_api_key')
