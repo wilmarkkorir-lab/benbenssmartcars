@@ -94,9 +94,13 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'wilmarkkorir@gmail.com'
-EMAIL_HOST_PASSWORD = 'your_gmail_app_password'  # Replace with Gmail App Password
+EMAIL_HOST_PASSWORD = 'your_gmail_app_password'
 DEFAULT_FROM_EMAIL = 'BenBens Smart Cars <wilmarkkorir@gmail.com>'
 NOTIFY_EMAIL = 'wilmarkkorir@gmail.com'
+
+# WhatsApp notification via CallMeBot
+WHATSAPP_PHONE = '254705387545'  # Your number without +
+WHATSAPP_API_KEY = 'your_callmebot_api_key'  # Replace after setup
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
