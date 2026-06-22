@@ -3,9 +3,15 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-f68zo%s+3^p4*$v5t1o)7#3rtl(u#8$&6d!8bwbv)-&1t53r6g')
+try:
+    from dotenv import load_dotenv
+    load_dotenv(BASE_DIR / '.env')
+except Exception:
+    pass
 
-DEBUG = False
+SECRET_KEY = os.environ.get('SECRET_KEY') or '#rm5e&1x27xnsr^8m&fmo12fw9@o!+@v194___vy0(*xq6gg^&'
+
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     'benbenssmartcars.alwaysdata.net',
