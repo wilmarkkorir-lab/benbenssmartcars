@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.shortcuts import redirect
 import json
 
 @csrf_exempt
@@ -24,6 +25,7 @@ def admin_login(request):
         return JsonResponse({'error': str(e)}, status=400)
 
 urlpatterns = [
+    path('', lambda request: redirect('/api/')),
     path('admin/', admin.site.urls),
     path('api/auth/login/', admin_login),
     path('api/', include('cars.urls')),
